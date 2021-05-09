@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import './App.scss';
-
+import './App.scss'
+import ReactDOM from 'react-dom';
 
 
 import { Layout, Menu,Avatar, TreeSelect,  Dropdown,AutoComplete,Input }from 'antd' ;
@@ -27,7 +27,7 @@ import Search from 'antd/lib/input/Search';
 import logo from './img/Books-512.png';
 import Document from './component/Document/document';
 
-import Update from './component/Upload/upload';
+import Uploads from './component/Upload/upload';
 
 
 import Procedure from './component/Procedure/procedure';
@@ -183,7 +183,7 @@ function App() {
             <Procedure />
             </Route>
             <Route  path="/upload">
-            <Update/>
+            <Uploads/>
             </Route>
            
            

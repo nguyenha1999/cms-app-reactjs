@@ -1,9 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+
 import 'antd/dist/antd.css';
 import './document.css';
-import { Table, Input, Button, Popconfirm, Form,InputNumber } from 'antd';
+import { Table, Input, Button, Popconfirm, Form,InputNumber ,Upload, message  } from 'antd';
+import { UploadOutlined } from '@ant-design/icons';
+import Props from './props';
+
 const EditableContext = React.createContext(null);
+
 
 const EditableRow = ({ index, ...props }) => {
   const [form] = Form.useForm();
@@ -84,11 +88,35 @@ const EditableCell = ({
 
   return <td {...restProps}>{childNode}</td>;
 };
-
-
-
+const props = {
+  name: 'file',
+  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+  progress: {
+    strokeColor: {
+      '0%': '#108ee9',
+      '100%': '#87d068',
+    },
+    strokeWidth: 3,
+    format: percent => `${parseFloat(percent.toFixed(2))}%`,
+  },
+};
 class EditableTable extends React.Component {
+  
   constructor(props) {
+    
     super(props);
     this.columns = [
       {
@@ -112,9 +140,10 @@ class EditableTable extends React.Component {
       },
       {
         title: 'Update',
-        
-      },
-
+        render: ()=> (
+          <Props/>     
+        ),
+        },
       {
         title: 'Delete',
         dataIndex: 'operation',
@@ -129,23 +158,21 @@ class EditableTable extends React.Component {
     this.state = {
       dataSource: [
         {
-          key: '0',
-          name: 'Edward King 0',
-          age: '32',
-          address: 'London, Park Lane no. 0',
+          key: '1',
+          name: 'add name document 1',
+          age: '1',
+          address: 'dd/mm/yy',
         },
         {
-          key: '1',
-          name: 'Edward King 1',
-          age: '32',
-          address: 'London, Park Lane no. 1',
+          key: '2',
+          name: 'add name document 2',
+          age: '2',
+          address: 'dd/mm/yy',
         },
       ],
-      count: 2,
+      count: 3,
     };
   }
-  
-
     handleDelete = (key) => {
     const dataSource = [...this.state.dataSource];
     this.setState({
@@ -156,9 +183,9 @@ class EditableTable extends React.Component {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
-      name: `Edward King ${count}`,
+      name: `add name document ${count}`,
       age: `${count}`,
-      address: `London, Park Lane no. ${count}`,
+      address: `dd/mm/yy ${count}`,
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -174,6 +201,7 @@ class EditableTable extends React.Component {
       dataSource: newData,
     });
   };
+  
 
   render() {
     const { dataSource } = this.state;
@@ -208,7 +236,7 @@ class EditableTable extends React.Component {
             marginBottom: 16,
           }}
         >
-          Add a document
+          Add new document
         </Button>
         <Table
           components={components}
@@ -221,15 +249,7 @@ class EditableTable extends React.Component {
     )
   }
 }
-
-
-
-
 const Document = () =>{
-  
-
-  
-  
     return (
      
       <>

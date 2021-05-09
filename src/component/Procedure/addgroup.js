@@ -1,7 +1,7 @@
 import React from 'react';
 
 import 'antd/dist/antd.css';
-import './upload.css';
+
 import { Upload, message, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 
@@ -30,17 +30,13 @@ const props = {
     format: percent => `${parseFloat(percent.toFixed(2))}%`,
   },
 };
-const Uploads = () =>{
-    return(
-    
-      <Upload {...props}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-  </Upload>
-        
-      
-      
+
+const Addgroup = () =>   {
+     return (
+        <Upload {...props}>
+            <Button icon={<UploadOutlined />}>Click to Upload</Button>
+         </Upload>
     );
+ }
 
-    };
-
-export default  Uploads;
+export default Addgroup;
