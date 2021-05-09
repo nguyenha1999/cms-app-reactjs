@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import ReactDOM from 'react-dom';
+
 import 'antd/dist/antd.css';
 
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
 import './procedure.css';
+import Addgroup from './addgroup.js';
+
 
 const EditableContext = React.createContext(null);
 
@@ -109,6 +111,12 @@ class EditableTable extends React.Component {
         editable: true,
       },
       {
+        title: 'Update',
+        render: ()=> (
+          <Addgroup/>     
+        ),
+        },
+      {
         title: 'Delete',
         dataIndex: 'operation',
         render: (_, record) =>
@@ -123,18 +131,18 @@ class EditableTable extends React.Component {
       dataSource: [
         {
           key: '1',
-          name: 'Edward King 1',
+          name: 'Add new group',
           age: '1',
-          address: 'London, Park Lane no. 1',
+          address: 'dd/mm/yy',
         },
         {
           key: '2',
-          name: 'Edward King 1',
+          name: 'Add new group',
           age: '2',
-          address: 'London, Park Lane no. 2',
+          address: 'dd/mm/yy',
         },
       ],
-      count: 2,
+      count: 3,
     };
   }
 
@@ -148,9 +156,9 @@ class EditableTable extends React.Component {
     const { count, dataSource } = this.state;
     const newData = {
       key: count,
-      name: `Edward King ${count}`,
+      name: `Add new group ${count}`,
       age: `${count}`,
-      address: `London, Park Lane no. ${count}`,
+      address: `dd/mm/yy ${count}`,
     };
     this.setState({
       dataSource: [...dataSource, newData],
