@@ -1,8 +1,0 @@
-{
-  "name": "cms-app-reactjs",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "moment-timezone": "^0.5.33"
-  }
-}
