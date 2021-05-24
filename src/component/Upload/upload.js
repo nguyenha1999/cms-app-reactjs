@@ -1,46 +1,115 @@
-import React from 'react';
-
-import 'antd/dist/antd.css';
+/* eslint-disable no-undef */
+/* eslint-disable no-use-before-define */
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect, useRef, Fragment } from 'react';
 import './upload.css';
-import { Upload, message, Button } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Button, Form, Modal, Input, Upload, Table, Props, Popconfirm } from 'antd';
+import { DeleteOutlined, PlusCircleFilled } from '@ant-design/icons';
+import Add from './add';
+import Clock from 'react-live-clock';
+import { LayoutContext } from 'antd/lib/layout/layout';
 
-const props = {
-  name: 'file',
-  action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
+const Uploads = () => {
+  const [showModal, setShowModal] = useState(false);
+
+  const [values, setValues] = useState([]);
+  const onCreate = (data) => {
+    setValues([...values,
+    {
+      key: values.length + 1,
+      ...data,
     }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-  progress: {
-    strokeColor: {
-      '0%': '#108ee9',
-      '100%': '#87d068',
+
+    ]);
+    setShowModal(false);
+  };
+
+  const columns = [
+    {
+      title: 'DocName',
+      dataIndex: 'documentName',
+      key: 'documentName',
+      
     },
-    strokeWidth: 3,
-    format: percent => `${parseFloat(percent.toFixed(2))}%`,
-  },
+    {
+      title: 'Code',
+      dataIndex: 'code',
+      key: 'code',
+    },
+    {
+      title: 'Time of issue',
+      dataIndex: '',
+      key: '',
+      width: '15%',
+
+    },
+    {
+      title: 'Date of issue',
+
+      width: '20%',
+
+
+
+      render: () =>
+      (
+        <Clock format={'HH:mm:ss-D/MM/YYYY'} />
+      ),
+    },
+    {
+      title: 'Edit',
+      width: '18%',
+      dataIndex: 'upload',
+      key: 'upload',
+      render: () => (
+        <>
+        </>
+      ),
+    },
+    {
+      title: 'Delete',
+      width: '10%',
+      dataIndex: 'operation',
+       
+       render: (_, record) => (
+         
+           <Button icon={<DeleteOutlined/>} type={"link"} 
+             />
+       ),  
+    },
+  ];
+  
+
+
+  return (
+    <Fragment>
+
+      <Button
+        type="primary"
+        style={{ marginBottom: 16, }}
+        date
+
+
+        onClick={() => {
+          setShowModal(true);
+        }}
+      >
+        Create Document
+      </Button>
+
+      <Table bordered dataSource={values} columns={columns} />
+
+
+
+      <Add show={showModal}
+        onCreate={onCreate}
+        onCancel={() => {
+          setShowModal(false);
+        }}
+      />
+    </Fragment>
+
+  );
 };
-const Uploads = () =>{
-    return(
-    
-      <Upload {...props}>
-        <Button icon={<UploadOutlined />}>Click to Upload</Button>
-  </Upload>
-        
-      
-      
-    );
-
-    };
-
-export default  Uploads;
+export default Uploads;

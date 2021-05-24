@@ -2,9 +2,9 @@ import React, { useContext, useState, useEffect, useRef } from 'react';
 
 import 'antd/dist/antd.css';
 
-import { Table, Input, Button, Popconfirm, Form } from 'antd';
-import './procedure.css';
-import Addgroup from './addgroup.js';
+import { Table, Input,Checkbox, Button, Popconfirm, Form } from 'antd';
+
+
 
 
 const EditableContext = React.createContext(null);
@@ -109,20 +109,22 @@ class EditableTable extends React.Component {
         title: 'Issue  time',
         dataIndex: 'address',
         editable: true,
+        
       },
       {
         title: 'Update',
-        render: ()=> (
-          <Addgroup/>     
+        render: () => (
+          <>
+          </>
         ),
-        },
+      },
       {
         title: 'Delete',
         dataIndex: 'operation',
         render: (_, record) =>
           this.state.dataSource.length >= 1 ? (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.handleDelete(record.key)}>
-              <a>Delete</a>
+              <Checkbox></Checkbox>
             </Popconfirm>
           ) : null,
       },
@@ -208,34 +210,40 @@ class EditableTable extends React.Component {
             marginBottom: 16,
           }}
         >
-          Add new Group
+          Add new document
         </Button>
+
         <Table
           components={components}
           rowClassName={() => 'editable-row'}
           bordered
           dataSource={dataSource}
           columns={columns}
+          pagination={{ pageSize: 5 }} scroll={{ y: 320 }} 
+
         />
+
       </div>
+
+
     )
   }
 }
 
-const Procedure = () =>{
-    return(
-      <div>
-        <EditableTable />
-      </div>
-        
-        
-
-        
+const Procedure = () => {
+  return (
+    <div>
+      <EditableTable />
+    </div>
 
 
-    
-    
-    );
+
+
+
+
+
+
+  );
 
 };
 export default Procedure;
