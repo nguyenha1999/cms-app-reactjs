@@ -6,15 +6,10 @@ import { createProcedure, editProcedure, getListProcedure } from "../../redux/ac
 import { getListDocument } from "../../redux/action/doc";
 import InfiniteScroll from 'react-infinite-scroller';
 
-
 const Form = ({ handleClose, action, item }) => {
 
-
-
     const onSubmit = () => {
-
     }
-
     return (
         <div className="position-relative">
 
