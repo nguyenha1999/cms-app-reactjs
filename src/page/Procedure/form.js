@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
 import Button from "../../component/Button/button";
 import { Row, Col, message, Spin, List, Avatar, Checkbox } from 'antd';
 import { createProcedure, editProcedure, getListProcedure } from "../../redux/action/group";
