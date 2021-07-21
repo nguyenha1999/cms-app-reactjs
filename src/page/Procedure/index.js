@@ -12,7 +12,8 @@ import Modal from "../../component/Modal/modal";
 import moment from "moment";
 import Button from '../../component/Button/button';
 import { message, Tooltip } from 'antd';
-import FormDocument from "./form";
+import Forms from "./form";
+import FormDocument from "../Document/component/form";
 
 
 const Procedure = () => {
@@ -24,7 +25,6 @@ const Procedure = () => {
         pageSize: 5,
         search: ""
     });
-    const [loading, setLoading] = useState(false);
     const [visible, setVisible] = useState(false);
     const [action, setAction] = useState("");
     const [item, setItem] = useState(null);
@@ -38,25 +38,14 @@ const Procedure = () => {
         dispatch(deleteProcedure(id, { _id: true }, () => { dispatch(getListProcedure(model)) }))
         console.log(id, "id")
     }
-    // }
-    // const submit = () => {
-    //     if (action == "add") {
-    //         dispatch(createDocument(form))
-    //           } else { 
-    //       dispatch(editDocument(form.id , form , ()=> { dispatch(getListDocument(model))})) 
-    //     }
-    //     setShowModal(false);
-    //     setAction("add");
-    //     setForm({
-    //         ...form,
-    //         id: "",
-    //         docname: "",
-    //         code: "",
-    //     })
-    // }
+
     const onOk = () => { }
     const expandedRowRender = (record, index, indent, expanded) => {
-
+        const dataColumn = record.documents.map(item => ({
+            ...item,
+            key: item.document._id
+        }));
+        console.log(it)
         const columns = [
             {
                 title: "Mã Tài Liệu - Quy Trình ",
@@ -70,8 +59,8 @@ const Procedure = () => {
             },
             {
                 title: "Tên Tài Liệu",
-                dataIndex: ["document", "name"],
-                key: "name"
+                dataIndex: ["document", "docname"],
+                key: "docname"
             },
             {
                 title: 'Lần Ban Hành ',
@@ -120,7 +109,7 @@ const Procedure = () => {
         ];
         return <Table
             size="small"
-            // dataSource={dataColumn}
+            dataSource={dataColumn}
             columns={columns}
             pagination={{ pageSize: 5 }} scroll={{ y: 340 }}
         />;
@@ -177,6 +166,11 @@ const Procedure = () => {
             )
         },
     ];
+    const data = items.map(item => ({
+        ...item,
+        key: item.id
+    }));
+
     return (
         <>
             <Button
@@ -194,7 +188,7 @@ const Procedure = () => {
                 size="middle"
                 pagination={{ pageSize: 5 }} scroll={{ y: 340 }}
                 expandedRowRender={expandedRowRender}
-                dataSource={items}
+                dataSource={data}
                 columns={columns} />
             {
                 visible &&
@@ -212,7 +206,7 @@ const Procedure = () => {
                         footer={null}
                     >
                         <div>
-                            <Form
+                            <Forms
                                 item={item}
                                 action={action}
                                 handleClose={() => setVisible(false)} />
@@ -241,6 +235,7 @@ const Procedure = () => {
                                 action={actionDocument}
                                 handleClose={() => setVisibleDocument(false)} />
                         </div>
+
                     </Modal>
                 )
             }

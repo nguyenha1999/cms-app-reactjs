@@ -1,7 +1,4 @@
-import { Card, Col, notification, Row } from 'antd';
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { BookFilled, HddFilled, UploadOutlined, DownloadOutlined } from '@ant-design/icons';
+import React, { useState } from 'react'
 import ColumnChart from './Chart/index'
 import moment from 'moment'
 
@@ -40,34 +37,31 @@ function fillDataChart(data) {
     }
 }
 
-
-
-function Home() {
+const Home = () => {
     const [dataChart, setDataChart] = useState({})
     return (
-                
-                    <ColumnChart
-                        categories={listDates}
-                        series={[
-                            {
-                                name: "Tài liệu",
-                                data: dataChart.document ?? []
-                            },
-                            {
-                                name: "Quy trình",
-                                data: dataChart.procedure ?? []
-                            },
-                            {
-                                name: "Lượt đăng",
-                                data: dataChart.upload ?? []
-                            },
-                            {
-                                name: "Lượt tải",
-                                data: dataChart.download ?? []
-                            },
-                        ]}
-                    />
+
+        <ColumnChart
+            categories={listDates}
+            series={[
+                {
+                    name: "Tài liệu",
+                    data: dataChart.document ?? []
+                },
+                {
+                    name: "Quy trình",
+                    data: dataChart.procedure ?? []
+                },
+                {
+                    name: "Lượt đăng",
+                    data: dataChart.upload ?? []
+                },
+                {
+                    name: "Lượt tải",
+                    data: dataChart.download ?? []
+                },
+            ]}
+        />
     )
 }
-
-export default Home
+export default Home;

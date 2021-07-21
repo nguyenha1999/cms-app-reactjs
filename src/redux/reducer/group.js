@@ -25,7 +25,7 @@ export default (state = initState, action) => {
             };
 
         case types.CREATE_PROCEDURE_SUCCESS:
-            state.items = [action.data.dataa, ...state.items],
+            state.items = [action.data.data, ...state.items],
                 state.total = state.total + 1;
             return {
                 ...state,

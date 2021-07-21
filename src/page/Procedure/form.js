@@ -1,43 +1,97 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import * as yup from 'yup';
 import Button from "../../component/Button/button";
-import { Row, Col, message, Spin, List, Avatar, Checkbox } from 'antd';
-import { createProcedure, editProcedure, getListProcedure } from "../../redux/action/group";
+import { Row, Col, message, List, Checkbox } from 'antd';
 import { getListDocument } from "../../redux/action/doc";
-import InfiniteScroll from 'react-infinite-scroller';
 
 
 const Form = ({ handleClose, action, item }) => {
 
+    const dispatch = useDispatch();
+    const [idSelected, setIdSelected] = useState([]);
+    const items = useSelector(state => state.document.items);
+    console.log(items, "it")
+    const [model, setModel] = useState({
+        page: 1,
+        pageSize: 20,
+        search: ""
+    });
+    useEffect(() => {
+        try {
+            dispatch(getListDocument(model));
+        }
+        catch (err) {
+            console.log(err, "err");
+        }
+
+    }, [model.page])
+    useEffect(() => {
+        try {
+            dispatch(getListDocument(model));
+        }
+        catch (err) {
+            console.log(err, "err");
+        }
+
+    }, [model.page])
+
+    useEffect(() => {
+        if (!item) return;
+        setIdSelected(item.documents.map(x => x.document._id));
+    }, [item])
+    console.log(item)
 
 
-    const onSubmit = () => {
 
+    const chageSelected = (id) => {
+        if (idSelected.includes(id)) {
+            setIdSelected(idSelected.filter(x => x !== id));
+        } else {
+            setIdSelected([id, ...idSelected]);
+        }
     }
 
+    const checkAll = () => {
+        if (idSelected.length == items.length) {
+            setIdSelected([]);
+        } else {
+            setIdSelected(items.map(x => x._id));
+        }
+    }
+
+    const onSubmit = async (data) => {
+        if (idSelected.length == 0) {
+            message.error('Bạn cần chọn tài liệu');
+            return;
+        }
+
+        data = {
+            documentIds: idSelected
+        }
+
+    };
+    console.log(idSelected, "idSelected");
     return (
         <div className="position-relative">
-
             <Row gutter={16}>
                 <Col md={24}>
                     <div className="procedure-infinite-container">
-                        <Checkbox >
+                        <Checkbox onChange={checkAll}
+                            checked={idSelected.length == items.length}>
                             Tất cả
                         </Checkbox>
-                        <InfiniteScroll
-
-                        >
-                            <List
-                            >
-                                <List.Item className="pointer"
+                        <List
+                            dataSource={items}
+                            renderItem={item => (
+                                <List.Item key={item.id} className="pointer"
+                                    onClick={() => chageSelected(item.id)}
                                 >
-                                    <Checkbox />
-
+                                    <Checkbox checked={idSelected.includes(item.id)} />
+                                    <span>{item.docname}</span>
                                 </List.Item>
-
-                            </List>
-                        </InfiniteScroll>
+                            )}
+                        >
+                        </List>
                     </div>
                 </Col>
             </Row>
