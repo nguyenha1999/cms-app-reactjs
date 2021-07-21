@@ -1,37 +1,33 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from "../../component/Button/button";
-import { Row, Col, message, Spin, List, Avatar, Checkbox } from 'antd';
-import { createProcedure, editProcedure, getListProcedure } from "../../redux/action/group";
+import { Row, Col, message, List, Checkbox } from 'antd';
 import { getListDocument } from "../../redux/action/doc";
-import InfiniteScroll from 'react-infinite-scroller';
 
 const Form = ({ handleClose, action, item }) => {
 
-    const onSubmit = () => {
-    }
+
     return (
         <div className="position-relative">
-
             <Row gutter={16}>
                 <Col md={24}>
                     <div className="procedure-infinite-container">
-                        <Checkbox >
+                        <Checkbox onChange={checkAll}
+                            checked={idSelected.length == items.length}>
                             Tất cả
                         </Checkbox>
-                        <InfiniteScroll
-
-                        >
-                            <List
-                            >
-                                <List.Item className="pointer"
+                        <List
+                            dataSource={items}
+                            renderItem={item => (
+                                <List.Item key={item.id} className="pointer"
+                                    onClick={() => chageSelected(item.id)}
                                 >
-                                    <Checkbox />
-
+                                    <Checkbox checked={idSelected.includes(item.id)} />
+                                    <span>{item.docname}</span>
                                 </List.Item>
-
-                            </List>
-                        </InfiniteScroll>
+                            )}
+                        >
+                        </List>
                     </div>
                 </Col>
             </Row>
