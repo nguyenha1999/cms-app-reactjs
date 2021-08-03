@@ -1,0 +1,13 @@
+.procedure-infinite-container {
+  min-height: 500px;
+  padding: 8px 5px;
+  overflow: auto;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+}
+.procedure-loading-container {
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  text-align: center;
+}
