@@ -1,6 +1,6 @@
 import { call, put, takeLatest, delay } from 'redux-saga/effects';
 import {
-    types, updateProfileError, updateProfileSuccess, userLoginError,
+    typesAuth, updateProfileError, updateProfileSuccess, userLoginError,
     userLoginSuccess, userLogoutError, userLogoutSuccess
 } from './../../actions/User';
 import { showLoading, hideLoading } from './../../actions/Ui';
@@ -87,6 +87,7 @@ function* userLogout() {
 
 }
 
+
 function* updateProfile(action) {
     try {
 
@@ -112,8 +113,8 @@ function* updateProfile(action) {
 }
 
 export default function* authSaga() {
-    yield takeLatest(types.USER_LOGIN, userLogin);
-    yield takeLatest(types.USER_REGISTER, userRegister);
-    yield takeLatest(types.USER_LOGOUT, userLogout);
-    yield takeLatest(types.UPDATE_PROFILE, updateProfile);
+    yield takeLatest(typesAuth.USER_LOGIN, userLogin);
+    yield takeLatest(typesAuth.USER_REGISTER, userRegister);
+    yield takeLatest(typesAuth.USER_LOGOUT, userLogout);
+    yield takeLatest(typesAuth.UPDATE_PROFILE, updateProfile);
 }

@@ -6,6 +6,7 @@ import {
   ActivityController,
   UserController,
   TrackingDownloadController,
+  MemberController,
 } from "../controllers/index.js";
 import { TestController } from "../controllers/Tescontroller.js";
 
@@ -95,5 +96,26 @@ export class RouteRegistration {
       passport.authenticate("jwt", { session: false }),
       TrackingDownloadController.retrieve
     );
+    app.get(
+      "/members",
+      passport.authenticate("jwt", { session: false }),
+      MemberController.retrieve
+    );
+    app.post(
+      "/members",
+      passport.authenticate("jwt", { session: false }),
+      MemberController.create
+    );
+    app.put(
+      "/members/:_id",
+      passport.authenticate("jwt", { session: false }),
+      MemberController.update
+    );
+    app.delete(
+      "/members/:_id",
+      passport.authenticate("jwt", { session: false }),
+      MemberController.delete
+    );
   }
 }
+

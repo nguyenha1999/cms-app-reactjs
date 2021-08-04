@@ -3,6 +3,7 @@ import Register from '../pages/Register';
 import Home from '../pages/Home';
 import Document from '../pages/Document';
 import Procedure from '../pages/Procedure';
+import User from '../pages/User';
 import Profile from '../pages/Profile';
 import NotFoundPage from '../pages/NotFoundPage';
 
@@ -31,6 +32,10 @@ const Router = [
     {
         path: '/procedure',
         main: () => <Procedure />
+    },
+    {
+        path: '/user',
+        main: () => <User />
     },
     {
         path: '/profile',

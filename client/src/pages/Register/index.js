@@ -77,8 +77,6 @@ const Signup = () => {
                                         offset: 0,
                                         span: 24,
                                     }}
-
-
                                 >
                                     <Input
                                         name="email"
@@ -146,7 +144,6 @@ const Signup = () => {
                                         span: 24,
                                     }}
 
-
                                 >
                                     <Input
                                         name="firstName"
@@ -166,7 +163,6 @@ const Signup = () => {
                                         offset: 0,
                                         span: 24,
                                     }}
-
 
                                 >
                                     <Input

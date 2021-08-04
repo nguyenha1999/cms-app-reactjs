@@ -97,7 +97,8 @@ export class DocumentController {
       flag = true;
     }
     if (data.file != oldValue.file._id) {
-      content += `${flag ? ',' : ''}sửa file ${oldValue.file.name} thành ${document.file.name}`;
+      content += `${flag ? ',' : ''}  sửa file ${oldValue.file.name} thành ${document.file.name}`;
+      flag = true;
     }
 
     await ActivityModel.create({

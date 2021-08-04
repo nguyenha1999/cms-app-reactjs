@@ -2,6 +2,7 @@ import {
     FileOutlined,
     FolderOutlined,
     HomeOutlined,
+    UserOutlined,
     SettingOutlined
 } from '@ant-design/icons';
 
@@ -19,6 +20,11 @@ var menu = [
     {
         title: "Quy Trình",
         path: "/procedure",
+        icon: <FolderOutlined />,
+    },
+    {
+        title: "Người Dùng",
+        path: "/user",
         icon: <FolderOutlined />,
     },
     {

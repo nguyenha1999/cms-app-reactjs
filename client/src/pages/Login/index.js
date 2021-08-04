@@ -76,8 +76,6 @@ const Login = () => {
                                         offset: 0,
                                         span: 24,
                                     }}
-
-
                                 >
                                     <Input
                                         name="email"
